@@ -1,0 +1,53 @@
+# Apache 2.2
+<IfModule !mod_authz_core.c>
+	Order Deny,Allow
+	Deny from all
+</IfModule>
+
+# Apache 2.4
+<IfModule mod_authz_core.c>
+	Require all denied
+</IfModule>
+
+# WOOSM CSS
+<FilesMatch "^(admin-main)\.css$">
+	<IfModule !mod_authz_core.c>
+		Allow from all
+	</IfModule>
+
+	<IfModule mod_authz_core.c>
+		Require all granted
+	</IfModule>
+</FilesMatch>
+
+# WOOSM JS
+<FilesMatch "^(admin-main)\.js$">
+	<IfModule mod_rewrite.c>
+		RewriteEngine On
+		RewriteBase /
+		RewriteRule ^wp-admin/includes/ - [F,L]
+		#RewriteRule !^wp-includes/ - [S=3]
+		#RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+		#RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+		#RewriteRule ^wp-includes/theme-compat/ - [F,L]
+	</IfModule>
+
+	<IfModule !mod_authz_core.c>
+		Allow from all
+	</IfModule>
+
+	<IfModule mod_authz_core.c>
+		Require all granted
+	</IfModule>
+</FilesMatch>
+
+# WOOSM IMG
+#<FilesMatch "^(bg-noise)\.(png)$">
+#	<IfModule !mod_authz_core.c>
+#		Allow from all
+#	</IfModule>
+#
+#	<IfModule mod_authz_core.c>
+#		Require all granted
+#	</IfModule>
+#</FilesMatch>
