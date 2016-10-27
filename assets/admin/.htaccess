@@ -10,7 +10,7 @@
 </IfModule>
 
 # WOOSM CSS
-<FilesMatch "^(admin-main)\.css$">
+<FilesMatch "^(admin-main|dd-style)\.css$">
 	<IfModule !mod_authz_core.c>
 		Allow from all
 	</IfModule>
@@ -21,17 +21,7 @@
 </FilesMatch>
 
 # WOOSM JS
-<FilesMatch "^(admin-main)\.js$">
-	<IfModule mod_rewrite.c>
-		RewriteEngine On
-		RewriteBase /
-		RewriteRule ^wp-admin/includes/ - [F,L]
-		#RewriteRule !^wp-includes/ - [S=3]
-		#RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
-		#RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
-		#RewriteRule ^wp-includes/theme-compat/ - [F,L]
-	</IfModule>
-
+<FilesMatch "^(admin-main|dd-script)\.js$">
 	<IfModule !mod_authz_core.c>
 		Allow from all
 	</IfModule>
@@ -42,12 +32,12 @@
 </FilesMatch>
 
 # WOOSM IMG
-#<FilesMatch "^(bg-noise)\.(png)$">
-#	<IfModule !mod_authz_core.c>
-#		Allow from all
-#	</IfModule>
-#
-#	<IfModule mod_authz_core.c>
-#		Require all granted
-#	</IfModule>
-#</FilesMatch>
+<FilesMatch "^(bg-noise|logo-30x30|ext-bg|ext-set)\.(png|gif)$">
+	<IfModule !mod_authz_core.c>
+		Allow from all
+	</IfModule>
+
+	<IfModule mod_authz_core.c>
+		Require all granted
+	</IfModule>
+</FilesMatch>

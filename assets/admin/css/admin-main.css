@@ -1,0 +1,77 @@
+/**
+ * Extensions page tab
+ **----------------------------------------------------------*/
+.wcsam-extensions {
+	/*border: 1px solid red;*/
+}
+
+.wcsam-extension-list {
+	/*border: 1px solid red;*/
+}
+
+.wcsam-extension-list > li {
+	display: inline-block;
+    width: 48%;
+    height: 150px;
+    margin: 0 8px 8px 0;
+    border: 1px solid #737373;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    background: url("../img/ext-bg.gif");
+}
+
+.wcsam-extension-table {
+    width: 100%;
+}
+
+.wcsam-extension-table th {
+    width: 60px;
+    padding: 5px;
+}
+
+.wcsam-extension-img {
+	width: 60px;
+	height: 60px;
+}
+
+.wcsam-extension-header {
+    padding: 6px;
+}
+
+.wcsam-exth-switch {
+    float: right;
+    padding: 3px 6px;
+
+    /*display: inline-block;*/
+    /*padding-left: 5px;*/
+}
+
+.wcsam-exth-ver {
+    display: inline-block;
+    padding: 5px 0;
+    font-weight: 600;
+    font-style: italic;
+
+    /*float: right;*/
+    /*padding: 3px 10px;*/
+    /*font-weight: 600;*/
+    /*font-style: italic;*/
+}
+
+.wcsam-extension-body {
+    margin-bottom: 10px;
+}
+
+.wcsam-exth-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #124964;
+    padding: 5px;
+}
+
+.wcsam-exth-desc {
+    font-size: 14px;
+    font-style: italic;
+    color: #888;
+    padding: 2px 5px;
+}

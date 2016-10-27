@@ -1,0 +1,4 @@
+title       = "Product Filters"
+version     = "1.0.0"
+modificated = "28-10-2016"
+description = "Filters products. Filtering by price, color, and etc."

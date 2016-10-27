@@ -18,6 +18,11 @@ $modules = (array) wcsam_get_option('wcsam', 'extensions', 'extensions', array()
 			if ( ! isset(WCSAM()->modules[ $ext_name ]) )
 				continue;
 
+			if ( ! WCSAM()->modules[ $ext_name ] && array_search( $ext_name, $modules ) !== false )
+				WCSAM()->modules[ $ext_name ] = true;
+			elseif ( WCSAM()->modules[ $ext_name ] && array_search( $ext_name, $modules ) === false )
+				WCSAM()->modules[ $ext_name ] = false;
+
 			$file_info = $path . DIRECTORY_SEPARATOR . 'info.dat';
 
 			if ( ! file_exists($file_info) )
@@ -37,13 +42,13 @@ $modules = (array) wcsam_get_option('wcsam', 'extensions', 'extensions', array()
 				<table class="wcsam-extension-table">
 					<tbody>
 						<tr valign="top">
-							<th><img class="wcsam-extension-img" src="<?= WCSAM_ASSETS_URL ?>admin/img/extensions.png" /></th>
+							<th><img class="wcsam-extension-img" src="<?= WCSAM_ASSETS_URL ?>admin/img/ext-set.png" /></th>
 							<td>
 								<div class="wcsam-extension-header">
 									<div class="wcsam-exth-switch">
-										<div class="ext-toggle toggle-light" data-toggle-on="<?= ($modules[ $ext_name ] ? 'true' : 'false' ) ?>"
+										<div class="ext-toggle toggle-light" data-toggle-on="<?= (WCSAM()->modules[ $ext_name ] ? 'true' : 'false' ) ?>"
 										     data-toggle-height="24" data-toggle-width="62"></div>
-										<input style="display: none" type="checkbox" name="extensions[]" <?= ($modules[ $ext_name ] ? 'CHECKED' : '' ) ?> value="<?= $ext_name ?>">
+										<input style="display: none" type="checkbox" name="extensions[]" <?= (WCSAM()->modules[ $ext_name ] ? 'CHECKED' : '' ) ?> value="<?= $ext_name ?>">
 									</div>
 									<div class="wcsam-exth-ver">ver.: <?= $info['version'] ?></div>
 								</div>
