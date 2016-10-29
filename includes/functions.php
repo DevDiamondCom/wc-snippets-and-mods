@@ -25,6 +25,17 @@ function wcsam_get_option( $page_slug, $tab_slug, $option_name = null, $default 
 }
 
 /**
+ * Filter array for the integer number is greater than zero
+ *
+ * @param  array $arr
+ * @return array
+ */
+function wcsam_array_int_above_zero( $arr )
+{
+	return array_unique( array_filter( array_map('intval', $arr), function($m){ return $m>0; } ) );
+}
+
+/**
  * TEST function - var_dump()
  *
  * @param mixed $data    - TEST data

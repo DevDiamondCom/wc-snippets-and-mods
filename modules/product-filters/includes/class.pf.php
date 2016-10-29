@@ -1,19 +1,16 @@
 <?php
-/**
- * Product filters - prices, colors, etc
- *
- * @class    Product_filters
- * @author   DevDiamond <me@devdiamond.com>
- * @package  WC_Snippets_And_Mods/Modules
- * @version  1.0.0
- */
 
-namespace WCSAM\ext;
+namespace WCSAM\modules\product_filters;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Class Product_filters
+ * Class Product_filters - Product filters, prices, colors, etc
+ *
+ * @class   Product_filters
+ * @author  DevDiamond <me@devdiamond.com>
+ * @package WCSAM\modules\product_filters
+ * @version 1.0.0
  */
 class Product_filters
 {
@@ -22,7 +19,18 @@ class Product_filters
 	 */
 	public function __construct()
 	{
-//		dd_var_dump('yes :)');
+		$this->init_includes();
+	}
+
+	/**
+	 * Initialization Module files
+	 */
+	private function init_includes()
+	{
+		if ( is_admin() )
+			require_once 'admin/class.pf-admin.php';
+
+		require_once 'shortcodes/class.pf-shortcode.php';
 	}
 }
 

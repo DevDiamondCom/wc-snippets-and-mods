@@ -1,19 +1,16 @@
 <?php
-/**
- * Default pages data
- *
- * @class    Admin_Default_Pages
- * @author   DevDiamond <me@devdiamond.com>
- * @package  WC_Snippets_And_Mods/Admin
- * @version  1.0.0
- */
 
 namespace WCSAM\admin\pages;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Class Admin_Default_Pages - Default Pages Params (data)
+ * Class Admin_Pages_Wcsam - Default pages data
+ *
+ * @class   Admin_Pages_Wcsam
+ * @author  DevDiamond <me@devdiamond.com>
+ * @package WCSAM\admin\pages
+ * @version 1.0.0
  */
 class Admin_Pages_Wcsam extends Admin_Pages
 {

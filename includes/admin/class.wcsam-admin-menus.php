@@ -1,19 +1,16 @@
 <?php
-/**
- * Setup menus in WP admin
- *
- * @class    Admin_Menus
- * @author   DevDiamond <me@devdiamond.com>
- * @package  WC_Snippets_And_Mods/Admin
- * @version  1.0.0
- */
 
 namespace WCSAM\admin;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Class Admin_Menus - Create WCSAM Menus
+ * Class Admin_Menus - Setup menus in WP admin
+ *
+ * @class   Admin_Menus
+ * @author  DevDiamond <me@devdiamond.com>
+ * @package WCSAM\admin
+ * @version 1.0.0
  */
 class Admin_Menus
 {

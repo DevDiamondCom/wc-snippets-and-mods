@@ -1,14 +1,4 @@
 <?php
-/**
- * Actions Settings WCSAM
- *
- * Manipulation of settings WCSAM
- *
- * @class    Admin_Action_Settings
- * @author   DevDiamond <me@devdiamond.com>
- * @package  WC_Snippets_And_Mods/Admin
- * @version  1.0.0
- */
 
 namespace WCSAM\admin;
 
@@ -20,6 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Class Admin_Action_Settings - Actions Settings WCSAM
+ *
+ * Manipulation of settings WCSAM
+ *
+ * @class   Admin_Action_Settings
+ * @author  DevDiamond <me@devdiamond.com>
+ * @package WCSAM\admin
+ * @version 1.0.0
  */
 class Admin_Action_Settings
 {

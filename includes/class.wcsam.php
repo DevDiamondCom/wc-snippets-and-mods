@@ -1,19 +1,16 @@
 <?php
-/**
- * WCSAM Core (Main Class)
- *
- * @class    WCSAM
- * @author   DevDiamond <me@devdiamond.com>
- * @package  WC_Snippets_And_Mods
- * @version  1.0.0
- */
+
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// Load Main WCSAM Class
 if ( ! class_exists( 'WCSAM' ) ) :
 
 /**
- * Class WCSAM - Main Class (Core).
+ * WCSAM Core (Main Class)
+ *
+ * @class   WCSAM
+ * @author  DevDiamond <me@devdiamond.com>
+ * @package WCSAM
+ * @version 1.0.0
  */
 final class WCSAM
 {
@@ -90,6 +87,8 @@ final class WCSAM
 	 */
 	private function includes()
 	{
+		require_once 'abstracts/abstract.wcsam-querys.php';
+
 		if ( $this->is_request('admin') )
 			require_once('admin/class.wcsam-admin.php');
 	}

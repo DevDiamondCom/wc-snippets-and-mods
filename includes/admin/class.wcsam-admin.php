@@ -1,19 +1,16 @@
 <?php
-/**
- * WP Admin Panel
- *
- * @class    Admin
- * @author   DevDiamond <me@devdiamond.com>
- * @package  WC_Snippets_And_Mods/Admin
- * @version  1.0.0
- */
 
 namespace WCSAM\admin;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Class Admin - Admin Panel set.
+ * Class Admin - WP Admin Panel
+ *
+ * @class   Admin
+ * @author  DevDiamond <me@devdiamond.com>
+ * @package WCSAM\admin
+ * @version 1.0.0
  */
 class Admin
 {
@@ -32,9 +29,9 @@ class Admin
 	public function includes_init()
 	{
 		require_once('class.wcsam-admin-menus.php');
-		require_once('class.wcsam-admin-action-settings.php');
 		require_once('class.wcsam-admin-menu-pages.php');
 		require_once('pages/class.wcsam-pages.php');
+		require_once('class.wcsam-admin-action-settings.php');
 	}
 
 	/**
