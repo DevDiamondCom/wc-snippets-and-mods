@@ -86,14 +86,14 @@ class Shortcodes_Price extends Abstract_Querys
 			'percent'     => 10,
 		), $attr ) );
 
-		if ( ! ($term_ids = $this->get_taxonomy_ids( $category )))
-			return '';
-
 		$per_page = (int)$per_page;
 		$price    = (double)$price;
 		$percent  = (double)$percent;
 
 		if ( $per_page <= 0 || $percent <= 0 || $price <= 0 )
+			return '';
+
+		if ( ! ($term_ids = $this->get_taxonomy_ids( $category )))
 			return '';
 
 		$min_price = $price - (($price * $percent) / 100);
@@ -140,14 +140,14 @@ class Shortcodes_Price extends Abstract_Querys
 			'range'    => 100,
 		), $attr ) );
 
-		if ( ! ($term_ids = $this->get_taxonomy_ids( $category )))
-			return '';
-
 		$per_page = (int)$per_page;
 		$price    = (double)$price;
 		$range    = (double)$range;
 
 		if ( $per_page <= 0 || $range <= 0 || $price <= 0 )
+			return '';
+
+		if ( ! ($term_ids = $this->get_taxonomy_ids( $category )))
 			return '';
 
 		if ( $range > $price )
@@ -198,14 +198,14 @@ class Shortcodes_Price extends Abstract_Querys
 			'max_price' => 9999999999,
 		), $attr ) );
 
-		if ( ! ($term_ids = $this->get_taxonomy_ids( $category )))
-			return '';
-
 		$per_page  = (int)$per_page;
 		$min_price = (double)$min_price;
 		$max_price = (double)$max_price;
 
 		if ( $per_page <= 0 || $max_price <= 0 || $min_price > $max_price )
+			return '';
+
+		if ( ! ($term_ids = $this->get_taxonomy_ids( $category )))
 			return '';
 
 		if ( $min_price <= 0 )
@@ -245,11 +245,12 @@ class Shortcodes_Price extends Abstract_Querys
 			'posts_per_page'      => $per_page,
 			'post__not_in'        => ($post_id ? array($post_id) : array()),
 			'meta_query'          => array(
-				'set1' => array(
-					'key'     => '_price',
-					'value'   => array($min_price, $max_price),
-					'compare' => 'BETWEEN',
-					'type'    => 'DECIMAL',
+				'price_filter' => array(
+					'key'          => '_price',
+					'value'        => array($min_price, $max_price),
+					'compare'      => 'BETWEEN',
+					'type'         => 'DECIMAL',
+					'price_filter' => true,
 				),
 			),
 			'tax_query' => array(
@@ -263,7 +264,7 @@ class Shortcodes_Price extends Abstract_Querys
 			'meta_key' => '',
 		));
 
-		if ( ! isset( $products->posts ) )
+		if ( empty( $products->posts ) )
 		{
 			if ( $this->is_echo )
 				return '';

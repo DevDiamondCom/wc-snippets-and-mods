@@ -42,14 +42,7 @@ abstract class Abstract_Querys
 		if ( ! is_object($term) || is_wp_error( $term ) )
 			return false;
 
-		$res_arr = [];
-		foreach ( $term as $tVal )
-		{
-			if ( isset($tVal->term_id) )
-				$res_arr[] = $tVal->term_id;
-		}
-
-		return $res_arr;
+		return array($term->term_id);
 	}
 
 	/**
