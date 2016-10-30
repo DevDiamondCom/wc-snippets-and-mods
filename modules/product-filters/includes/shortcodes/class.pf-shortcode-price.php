@@ -31,6 +31,13 @@ class Shortcodes_Price extends Abstract_Querys
 	private $is_echo = true;
 
 	/**
+	 * Max price
+	 *
+	 * @var int
+	 */
+	private $max_price = 9999999999;
+
+	/**
 	 * Shortcodes_Price constructor.
 	 */
 	public function __construct()
@@ -74,16 +81,18 @@ class Shortcodes_Price extends Abstract_Querys
 		$attr = (array) apply_filters('wcsam_product_filter_percent_price_attr', $attr);
 
 		/**
-		 * @var object|int|string $category  - Category (Required) (The term object, ID, or slug whose link will be retrieved.)
-		 * @var double            $price     - Price (Required)
-		 * @var int               $per_page  - Per.page (default: 5)
-		 * @var double            $percent   - Percent (default: 10)
+		 * @var object|int|string $category        - Category (Required) (The term object, ID, or slug whose link will be retrieved.)
+		 * @var double            $price           - Price (Required)
+		 * @var int               $per_page        - Per.page (default: 5)
+		 * @var string            $other_products  - Other product filter (default: 'none') {none, rand, price_min, price_max}
+		 * @var double            $percent         - Percent (default: 10)
 		 */
 		extract( shortcode_atts( array(
-			'category'    => '',
-			'price'       => 0,
-			'per_page'    => 5,
-			'percent'     => 10,
+			'category'       => '',
+			'price'          => 0,
+			'per_page'       => 5,
+			'other_products' => 'none',
+			'percent'        => 10,
 		), $attr ) );
 
 		$per_page = (int)$per_page;
@@ -99,7 +108,9 @@ class Shortcodes_Price extends Abstract_Querys
 		$min_price = $price - (($price * $percent) / 100);
 		$max_price = $price + (($price * $percent) / 100);
 
-		return $this->product_filter( $term_ids, $per_page, $min_price, $max_price );
+		$other_products = $this->correct_other_products_name( $other_products, $min_price, $max_price );
+
+		return $this->product_filter( $term_ids, $per_page, $min_price, $max_price, $other_products );
 	}
 
 	/**
@@ -128,16 +139,18 @@ class Shortcodes_Price extends Abstract_Querys
 		$attr = (array) apply_filters('wcsam_product_filter_range_price_attr', $attr);
 
 		/**
-		 * @var object|int|string $category  - Category (Required) (The term object, ID, or slug whose link will be retrieved.)
-		 * @var double            $price     - Price (Required)
-		 * @var int               $per_page  - Per.page (default: 5)
-		 * @var double            $range     - Range (default: 100)
+		 * @var object|int|string $category        - Category (Required) (The term object, ID, or slug whose link will be retrieved.)
+		 * @var double            $price           - Price (Required)
+		 * @var int               $per_page        - Per.page (default: 5)
+		 * @var string            $other_products  - Other product filter (default: 'none') {none, rand, price_min, price_max}
+		 * @var double            $range           - Range (default: 100)
 		 */
 		extract( shortcode_atts( array(
-			'category' => '',
-			'price'    => 0,
-			'per_page' => 5,
-			'range'    => 100,
+			'category'       => '',
+			'price'          => 0,
+			'per_page'       => 5,
+			'other_products' => 'none',
+			'range'          => 100,
 		), $attr ) );
 
 		$per_page = (int)$per_page;
@@ -157,7 +170,9 @@ class Shortcodes_Price extends Abstract_Querys
 
 		$max_price = $price + $range;
 
-		return $this->product_filter( $term_ids, $per_page, $min_price, $max_price );
+		$other_products = $this->correct_other_products_name( $other_products, $min_price, $max_price );
+
+		return $this->product_filter( $term_ids, $per_page, $min_price, $max_price, $other_products );
 	}
 
 	/**
@@ -186,16 +201,18 @@ class Shortcodes_Price extends Abstract_Querys
 		$attr = (array) apply_filters('wcsam_product_filter_absolute_price_attr', $attr);
 
 		/**
-		 * @var object|int|string $category  - Category (Required) (The term object, ID, or slug whose link will be retrieved.)
-		 * @var int               $per_page   - Per.page (default: 5)
-		 * @var double            $min_price  - Min price (default: 0)
-		 * @var double            $max_price  - Max price (default: 9999999999)
+		 * @var object|int|string $category        - Category (Required) (The term object, ID, or slug whose link will be retrieved.)
+		 * @var int               $per_page        - Per.page (default: 5)
+		 * @var string            $other_products  - Other product filter (default: 'none') {none, rand, price_min, price_max}
+		 * @var double            $min_price       - Min price (default: 0)
+		 * @var double            $max_price       - Max price (default: $this->max_price)
 		 */
 		extract( shortcode_atts( array(
-			'category'  => '',
-			'per_page'  => 5,
-			'min_price' => 0,
-			'max_price' => 9999999999,
+			'category'        => '',
+			'per_page'        => 5,
+			'other_products'  => 'none',
+			'min_price'       => 0,
+			'max_price'       => $this->max_price,
 		), $attr ) );
 
 		$per_page  = (int)$per_page;
@@ -211,20 +228,23 @@ class Shortcodes_Price extends Abstract_Querys
 		if ( $min_price <= 0 )
 			$min_price = 0;
 
-		return $this->product_filter( $term_ids, $per_page, $min_price, $max_price );
+		$other_products = $this->correct_other_products_name( $other_products, $min_price, $max_price );
+
+		return $this->product_filter( $term_ids, $per_page, $min_price, $max_price, $other_products );
 	}
 
 	/**
 	 * Search products for the filters
 	 *
-	 * @param array  $term_ids   - Category IDs (Taxonomy)
-	 * @param int    $per_page   - Per.page
-	 * @param double $min_price  - Min price
-	 * @param double $max_price  - Max price
+	 * @param array  $term_ids        - Category IDs (Taxonomy)
+	 * @param int    $per_page        - Per.page
+	 * @param double $min_price       - Min price
+	 * @param double $max_price       - Max price
+	 * @param double $other_products  - Other product filter name
 	 *
 	 * @return string|array
 	 */
-	private function product_filter( $term_ids, $per_page, $min_price, $max_price )
+	private function product_filter( $term_ids, $per_page, $min_price, $max_price, $other_products )
 	{
 		global $post;
 
@@ -263,6 +283,51 @@ class Shortcodes_Price extends Abstract_Querys
 			),
 			'meta_key' => '',
 		));
+
+		if ( $products->post_count < $per_page && $other_products !== 'none' )
+		{
+			$post_ids = ($post_id ? array($post_id) : array());
+			if ( empty( $products->posts ) )
+				$products->posts = array();
+
+			foreach ( $products->posts as $pVal )
+				$post_ids[] = $pVal->ID;
+
+			$arr_q2 = array(
+				'post_type'           => 'product',
+				'post_status'         => 'publish',
+				'ignore_sticky_posts' => '1',
+				'orderby'             => ($other_products === 'rand' ? 'rand' : 'menu_order title'),
+				'order'               => 'ASC',
+				'posts_per_page'      => ($per_page - $products->post_count),
+				'post__not_in'        => $post_ids,
+				'tax_query' => array(
+					'set1' => array(
+						'taxonomy' => 'product_cat',
+						'field'    => 'term_id',
+						'terms'    => implode( ',', $term_ids ),
+						'operator' => 'IN',
+					),
+				),
+				'meta_key' => '',
+			);
+			if ( $other_products === 'price_min' || $other_products === 'price_max' )
+			{
+				$arr_q2['meta_query'] = array(
+					'price_filter' => array(
+						'key'          => '_price',
+						'value'        => ($other_products === 'price_min' ? array(0, $min_price) : array($max_price, $this->max_price)),
+						'compare'      => 'BETWEEN',
+						'type'         => 'DECIMAL',
+						'price_filter' => true,
+					),
+				);
+			}
+			$wp_q2 = new \WP_Query( $arr_q2 );
+
+			if ( ! empty( $wp_q2->posts ) )
+				$products->posts = array_merge($products->posts, $wp_q2->posts);
+		}
 
 		if ( empty( $products->posts ) )
 		{
@@ -334,6 +399,27 @@ class Shortcodes_Price extends Abstract_Querys
 		$sql .= $tax_query_sql['where'] . $meta_query_sql['where'];
 
 		return $wpdb->get_row( $sql );
+	}
+
+	/**
+	 * Corrected other product filter name
+	 *
+	 * @param  string $other_products - Other product filter name
+	 * @param  double $min_price      - Min price
+	 * @param  double $max_price      - Max price
+	 *
+	 * @return string
+	 */
+	private function correct_other_products_name( $other_products, $min_price, $max_price )
+	{
+		if ( ! in_array( $other_products, array('none', 'rand', 'price_min', 'price_max') ) )
+			return 'none';
+		elseif ( $other_products === 'price_min' && $min_price == 0 )
+			return 'none';
+		elseif ( $other_products === 'price_max' && $max_price >= $this->max_price )
+			return 'none';
+		else
+			return $other_products;
 	}
 }
 
