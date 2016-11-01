@@ -98,6 +98,9 @@ final class WCSAM
 	 */
 	private function init_modules()
 	{
+		if ( ! $this->is_woocommerce_plugin() )
+			return;
+
 		$dir = glob( WCSAM_MODULES_DIR . '*', GLOB_ONLYDIR);
 		if ( ! is_array($dir)  )
 			return;
@@ -179,6 +182,19 @@ final class WCSAM
 	public function plugin_deactivation()
 	{
 		return;
+	}
+
+	/**
+	 * Check if WooCommerce is active
+	 *
+	 * @return bool
+	 */
+	public function is_woocommerce_plugin()
+	{
+		if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) || array_key_exists( 'woocommerce/woocommerce.php', get_site_option('active_sitewide_plugins') ) )
+			return true;
+		else
+			return false;
 	}
 
 	/**

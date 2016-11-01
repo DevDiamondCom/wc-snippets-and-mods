@@ -1,5 +1,17 @@
 <?php
 
+if ( ! WCSAM()->is_woocommerce_plugin() )
+{
+	?><div class="wcsam-extensions"><h1 class="wcsam-no-woocommerce"><?php
+	echo sprintf(
+		__('%s plugin is not installed. Current plug-in works only in conjunction with the plugin %s.', WCSAM_PLUGIN_SLUG),
+		'<a href="https://wordpress.org/plugins/woocommerce/">WooCommerce</a>'
+	);
+	?></h1></div><?php
+
+	return;
+}
+
 $dir = glob( WCSAM_MODULES_DIR . '*', GLOB_ONLYDIR);
 if ( ! is_array($dir)  )
 	return;
