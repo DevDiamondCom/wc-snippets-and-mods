@@ -1,4 +1,4 @@
-title       = "Added to Card popup"
+title       = "Ajax add to cart"
 version     = "1.0.0"
-modificated = "01-11-2016"
-description = ""
+modificated = "02-11-2016"
+description = "Button "Add to Cart" in the form of Ajax (adding a product without reloading the page). Button for simple products as well as being for variative products"
