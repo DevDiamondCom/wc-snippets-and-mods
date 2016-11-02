@@ -1,5 +1,5 @@
 # Show all css and js files
-<FilesMatch "^\.(js|css)$">
+<FilesMatch "\.(js|css)$">
 	<IfModule !mod_authz_core.c>
 		Allow from all
 	</IfModule>
