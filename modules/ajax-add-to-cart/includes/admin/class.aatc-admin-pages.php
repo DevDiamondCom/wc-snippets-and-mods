@@ -24,7 +24,7 @@ class Admin_Pages
 	}
 
 	/**
-	 * Add new PF menus in the WCSAM
+	 * Add new menus in the WCSAM
 	 */
 	private function add_menus()
 	{
@@ -41,7 +41,7 @@ class Admin_Pages
 	}
 
 	/**
-	 * Add Tab Pages PF
+	 * Add Tab Pages
 	 */
 	private function add_tab_pages()
 	{
