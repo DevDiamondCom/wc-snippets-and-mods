@@ -39,6 +39,7 @@ if ( ! defined('WCSAM_PLUGIN_BASENAME') ) define('WCSAM_PLUGIN_BASENAME', plugin
 if ( ! defined('WCSAM_AJAX_URL') )        define('WCSAM_AJAX_URL',        admin_url( 'admin-ajax.php', 'relative' ));
 
 if ( ! defined('WCSAM_ASSETS_URL') )    define('WCSAM_ASSETS_URL',    WCSAM_PLUGIN_URL . 'assets/');
+if ( ! defined('WCSAM_MODULES_URL') )   define('WCSAM_MODULES_URL',   WCSAM_PLUGIN_URL . 'modules/');
 if ( ! defined('WCSAM_MODULES_DIR') )   define('WCSAM_MODULES_DIR',   WCSAM_PLUGIN_DIR . 'modules/');
 if ( ! defined('WCSAM_TEMPLATES_DIR') ) define('WCSAM_TEMPLATES_DIR', WCSAM_PLUGIN_DIR . 'templates/');
 
