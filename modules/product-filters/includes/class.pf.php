@@ -15,6 +15,37 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class Product_filters
 {
 	/**
+	 * The single instance of the class.
+	 *
+	 * @static
+	 * @var Product_filters
+	 */
+	protected static $_instance = null;
+
+	/**
+	 * Main Ajax_Add_To_Cart Instance.
+	 *
+	 * @static
+	 * @return Product_filters - Main instance.
+	 */
+	public static function instance()
+	{
+		if ( is_null( self::$_instance ) )
+			self::$_instance = new self();
+		return self::$_instance;
+	}
+
+	/**
+	 * Cloning is forbidden.
+	 */
+	public function __clone(){}
+
+	/**
+	 * Unserializing instances of this class is forbidden.
+	 */
+	public function __wakeup(){}
+
+	/**
 	 * Product_filters constructor.
 	 */
 	public function __construct()
@@ -34,4 +65,4 @@ class Product_filters
 	}
 }
 
-new Product_filters;
+Product_filters::instance();
