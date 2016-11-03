@@ -43,6 +43,9 @@ class Admin_Menus
 		// Get Sub Menu list (API)
 		self::$submenu = (array) apply_filters('wcsam_submenu', array());
 
+		// Adjustment on page Plugins
+		add_filter('plugin_action_links', array($this, 'plugin_action_links'), 10, 2);
+
 //		add_action( 'admin_head', array( $this, '' ) );
 //		add_action( 'admin_bar_menu', array( $this, '' ) );
 	}
@@ -144,6 +147,26 @@ class Admin_Menus
 			return false;
 
 		return $page_slug;
+	}
+
+	/**
+	 * Adjustment on page Plugins
+	 *
+	 * @param array  $links  - Plugin Buttons
+	 * @param string $file   - Current plugin base file name
+	 *
+	 * @return mixed
+	 */
+	public function plugin_action_links($links, $file)
+	{
+		if ( $file === WCSAM_PLUGIN_BASENAME )
+		{
+			array_unshift(
+				$links,
+				'<a href="admin.php?page=' . self::MAIN_MENU_SLUG . '">' . __("Settings") . '</a>'
+			);
+		}
+		return $links;
 	}
 
 	/**
