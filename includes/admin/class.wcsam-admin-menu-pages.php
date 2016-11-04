@@ -385,7 +385,7 @@ class Admin_Menu_Pages
 	private static function begin_form_data()
 	{
 		self::$is_form = true;
-		self::$options = wcsam_get_option( self::$page_slug, self::$active_tab, self::$active_tab, array());
+		self::$options = wcsam_get_option( self::$page_slug, self::$active_tab, null, array());
 
 		echo '<form action="" method="POST">';
 	}
