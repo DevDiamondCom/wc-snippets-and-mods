@@ -30,14 +30,3 @@
 		Require all granted
 	</IfModule>
 </FilesMatch>
-
-# WOOSM IMG
-<FilesMatch "^(bg-noise|logo-30x30|ext-bg|ext-set)\.(png|gif)$">
-	<IfModule !mod_authz_core.c>
-		Allow from all
-	</IfModule>
-
-	<IfModule mod_authz_core.c>
-		Require all granted
-	</IfModule>
-</FilesMatch>
