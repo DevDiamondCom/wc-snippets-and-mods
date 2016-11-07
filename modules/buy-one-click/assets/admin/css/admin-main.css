@@ -1,0 +1,7 @@
+.boc_sms_template,
+.boc_sms_template span {
+    display: block;
+}
+.boc_sms_template span strong {
+    font-style: normal;
+}
