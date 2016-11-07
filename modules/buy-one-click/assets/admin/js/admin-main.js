@@ -8,6 +8,7 @@ jQuery( function( $ )
     var bocap = {
         'select_click_order_btn' : function( eVal )
         {
+            alert( eVal );
             $('#click_order_btn_close_msec, #click_order_btn_message, #click_order_btn_redirect_url').parent().slideUp();
             switch ( eVal )
             {
@@ -26,6 +27,9 @@ jQuery( function( $ )
         }
     };
 
-    bocap.select_click_order_btn( $('#click_order_btn:selected').val() );
-    $('#click_order_btn').change(function(){ bocap.select_click_order_btn($(this).val()); });
+    $(document).ready(function()
+    {
+        bocap.select_click_order_btn( $('#click_order_btn').val() );
+        $('#click_order_btn').change(function(){ bocap.select_click_order_btn($(this).val()); });
+    });
 });
