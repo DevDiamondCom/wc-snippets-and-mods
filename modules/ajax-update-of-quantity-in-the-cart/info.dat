@@ -1,0 +1,4 @@
+title       = "Ajax Update of Quantity in the Cart"
+version     = "1.0.0"
+modificated = "08-11-2016"
+description = "Ajax update of quantity product in the cart. Is very useful with the module 'Buy One Click'"
