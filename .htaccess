@@ -10,7 +10,7 @@
 </IfModule>
 
 # WOOSM CSS
-<FilesMatch "^(font-awesome\.min)\.css$">
+<FilesMatch "^[0-9a-zA-Z_\.-]*\.css$">
 	<IfModule !mod_authz_core.c>
 		Allow from all
 	</IfModule>
@@ -21,7 +21,7 @@
 </FilesMatch>
 
 # WOOSM JS
-<FilesMatch "^(toggles\.min)\.js$">
+<FilesMatch "^[0-9a-zA-Z_\.-]*\.js$">
 	<IfModule !mod_authz_core.c>
 		Allow from all
 	</IfModule>
