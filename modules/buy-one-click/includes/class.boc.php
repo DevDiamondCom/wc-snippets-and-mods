@@ -59,6 +59,9 @@ class Buy_One_Click
 		$this->init_includes();
 	}
 
+	/**
+	 * Defines
+	 */
 	private function add_defines()
 	{
 		define('BOC_ASSETS_URL', WCSAM_MODULES_URL . self::MODULE_NAME .'/assets/');
