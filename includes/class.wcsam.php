@@ -24,6 +24,21 @@ final class WCSAM
 	public $modules = array();
 
 	/**
+	 * @var bool Check for old WooCommerce Version
+	 */
+	public $current_wc_version  = false;
+	public $is_wc_older_2_1     = false;
+	public $is_wc_older_2_6     = false;
+
+	/**
+	 * Before WooCommerce 2.6 product attribute use term_id for filter.
+	 * From WooCommerce 2.6 use slug instead.
+	 *
+	 * @var string filtered term fields
+	 */
+	public $filter_term_field = 'slug';
+
+	/**
 	 * The single instance of the class.
 	 *
 	 * @static
@@ -87,6 +102,8 @@ final class WCSAM
 	 */
 	private function includes()
 	{
+		require_once 'class.wcsam-helper.php';
+
 		require_once 'abstracts/abstract.wcsam-querys.php';
 
 		if ( $this->is_request('admin') )
@@ -152,6 +169,16 @@ final class WCSAM
 	 */
 	public function init()
 	{
+		/**
+		 * WooCommerce Version Check
+		 */
+		$this->current_wc_version = WC()->version;
+		$this->is_wc_older_2_1    = version_compare( $this->current_wc_version, '2.1', '<' );
+		$this->is_wc_older_2_6    = version_compare( $this->current_wc_version, '2.6', '<' );
+
+		if ( $this->is_wc_older_2_6 )
+			$this->filter_term_field = 'term_id';
+
 		// Set up localisation.
 		$this->load_plugin_textdomain();
 
