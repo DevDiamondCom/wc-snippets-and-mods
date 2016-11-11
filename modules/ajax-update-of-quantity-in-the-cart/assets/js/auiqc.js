@@ -14,7 +14,7 @@ jQuery( function($)
         {
             e.preventDefault();
 
-            var obj_form_cart = $(event.target).closest('form');
+            var obj_form_cart = $(e.target).closest('form');
 
             if ( typeof( obj_form_cart ) === "undefined" )
                 return;

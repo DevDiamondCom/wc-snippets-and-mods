@@ -69,10 +69,13 @@ class Frontend
 		if ( $qty_val < 1 )
 			$qty_val = 1;
 
-		$saved_cart = @get_user_meta( get_current_user_id(), '_woocommerce_persistent_cart', true )['cart'];
+		if ( get_current_user_id() )
+		{
+			$saved_cart = @get_user_meta( get_current_user_id(), '_woocommerce_persistent_cart', true )['cart'];
 
-		if ( empty($saved_cart) || !isset($saved_cart[ $qty_name ]) )
-			die('ERROR');
+			if ( empty($saved_cart) || !isset($saved_cart[ $qty_name ]) )
+				die('ERROR');
+		}
 
 		if ( !WC()->cart->set_quantity( $qty_name, $qty_val ))
 			die('ERROR');
@@ -83,6 +86,9 @@ class Frontend
 	 */
 	public function add_scripts()
 	{
+		if ( ! is_cart() )
+			return;
+
 		// AUIQC Script
 		wp_enqueue_script(
 			'auiqc',
