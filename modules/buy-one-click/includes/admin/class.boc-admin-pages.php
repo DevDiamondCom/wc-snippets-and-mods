@@ -2,6 +2,8 @@
 
 namespace WCSAM\modules\buy_one_click\admin;
 
+use DD_SMSC\SMSC;
+
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
@@ -15,10 +17,20 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class Admin_Pages
 {
 	/**
+	 * SMSC service link
+	 *
+	 * @var string
+	 */
+	private $SMSC_link = 'SMSC';
+
+	/**
 	 * Admin_Pages constructor.
 	 */
 	public function __construct()
 	{
+		require_once WCSAM_PLUGIN_DIR . 'includes/libraries/class.smsc.php';
+		$this->SMSC_link = SMSC::SMSC_LINK;
+
 		$this->add_menus();
 		$this->add_tab_pages();
 	}
@@ -546,10 +558,11 @@ class Admin_Pages
 								), // END 'set_5'
 							),
 						),
+						// SMS Settings
 						'set_2' => array(
 							'group_args' => array(
 								'title' => __("SMS Settings", WCSAM_PLUGIN_SLUG),
-								'desc'  => __("Configuring SMS Notifications", WCSAM_PLUGIN_SLUG),
+								'desc'  => sprintf(__("Configuring SMS Notifications. Service is used %s", WCSAM_PLUGIN_SLUG), $this->SMSC_link ),
 							),
 							'fields' => array(
 								'set_1' => array(
@@ -567,7 +580,7 @@ class Admin_Pages
 								'set_2' => array(
 									'field_args' => array(
 										'title' => __("Login", WCSAM_PLUGIN_SLUG),
-										'desc'  => sprintf(__("Your login from the service %s", WCSAM_PLUGIN_SLUG), 'SMSC' ),
+										'desc'  => sprintf(__("Your login from the service %s", WCSAM_PLUGIN_SLUG), $this->SMSC_link ),
 									),
 									'fields' => array(
 										array(
@@ -580,7 +593,7 @@ class Admin_Pages
 								'set_3' => array(
 									'field_args' => array(
 										'title' => __("Password", WCSAM_PLUGIN_SLUG),
-										'desc'  => sprintf(__("Your password from the service %s", WCSAM_PLUGIN_SLUG), 'SMSC' ),
+										'desc'  => sprintf(__("Your password from the service %s", WCSAM_PLUGIN_SLUG), $this->SMSC_link ),
 									),
 									'fields' => array(
 										array(
