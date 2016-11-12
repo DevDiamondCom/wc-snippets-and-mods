@@ -39,6 +39,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 class SMSC
 {
+	const SMSC_LINK = '<a target="_blank" href="https://smsc.ru/?myDevDiamond" title="SMSC Service">SMSC</a>';
+
 	private $SMSC_LOGIN;
 	private $SMSC_PASSWORD;
 	private $SMSC_POST;
