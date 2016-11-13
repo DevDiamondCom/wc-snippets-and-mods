@@ -182,14 +182,20 @@ jQuery( function( $ )
         {
             e.preventDefault();
 
-            if ( minP === maxP || minP > maxP || (current_min_price === minP && current_max_price === maxP) )
+            if ( minP === maxP || minP > maxP )
+                return;
+
+            var newUrl     = pfw.newGetUrl( $('#price_slider_form').serialize() ),
+                currentUrl = window.location.href;
+
+            if ( newUrl === currentUrl )
                 return;
 
             pfw.createBG();
 
             // Update Ajax or Submit
             if ( $.trim(pf_widgets_data.update_container) )
-                History.pushState(null, document.title, pfw.newGetUrl( $('#price_slider_form').serialize() ));
+                History.pushState(null, document.title, newUrl);
             else
                 $('#price_slider_form').submit();
         });
