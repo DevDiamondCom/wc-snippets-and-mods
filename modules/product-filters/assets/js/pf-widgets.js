@@ -216,7 +216,17 @@ jQuery( function( $ )
                     filters_data[ f_name ] = filters_data[ f_name ] + ',' + f_val;
             });
 
-            var url = pfw.getCleanUrl() + '?' + $.param( $.extend( pfw.getUrlVars(), filters_data ) );
+            var urlObj        = pfw.getUrlVars(),
+                currentFilter = $(this).attr('name');
+
+            if ( ! $(this).prop("checked") )
+                delete urlObj[ currentFilter ];
+
+            var ulrGetStr = $.param( $.extend( urlObj, filters_data ) ),
+                url       = pfw.getCleanUrl();
+
+            if ( ulrGetStr != '')
+                url += '?' + ulrGetStr;
 
             pfw.createBG();
 
