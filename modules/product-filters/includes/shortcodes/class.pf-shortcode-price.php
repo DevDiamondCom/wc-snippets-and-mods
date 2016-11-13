@@ -355,53 +355,6 @@ class Shortcodes_Price extends Abstract_Querys
 	}
 
 	/**
-	 * Get filtered price
-	 *
-	 * wp-content\plugins\woocommerce\includes\widgets\class-wc-widget-price-filter.php
-	 *
-	 * @return array|null|object|void
-	 */
-	private function get_filtered_price()
-	{
-		global $wpdb, $wp_the_query;
-
-		$args       = $wp_the_query->query_vars;
-		$tax_query  = isset( $args['tax_query'] ) ? $args['tax_query'] : array();
-		$meta_query = isset( $args['meta_query'] ) ? $args['meta_query'] : array();
-
-		if ( ! empty( $args['taxonomy'] ) && ! empty( $args['term'] ) )
-		{
-			$tax_query[] = array(
-				'taxonomy' => $args['taxonomy'],
-				'terms'    => array( $args['term'] ),
-				'field'    => 'slug',
-			);
-		}
-
-		foreach ( $meta_query as $key => $query )
-		{
-			if ( ! empty( $query['price_filter'] ) || ! empty( $query['rating_filter'] ) )
-				unset( $meta_query[ $key ] );
-		}
-
-		$meta_query = new \WP_Meta_Query( $meta_query );
-		$tax_query  = new \WP_Tax_Query( $tax_query );
-
-		$meta_query_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
-		$tax_query_sql  = $tax_query->get_sql( $wpdb->posts, 'ID' );
-
-		$sql  = "SELECT min( CAST( price_meta.meta_value AS UNSIGNED ) ) as min_price, max( CAST( price_meta.meta_value AS UNSIGNED ) ) as max_price FROM {$wpdb->posts} ";
-		$sql .= " LEFT JOIN {$wpdb->postmeta} as price_meta ON {$wpdb->posts}.ID = price_meta.post_id " . $tax_query_sql['join'] . $meta_query_sql['join'];
-		$sql .= " 	WHERE {$wpdb->posts}.post_type = 'product'
-					AND {$wpdb->posts}.post_status = 'publish'
-					AND price_meta.meta_key IN ('" . implode( "','", array_map( 'esc_sql', apply_filters( 'woocommerce_price_filter_meta_keys', array( '_price' ) ) ) ) . "')
-					AND price_meta.meta_value > '' ";
-		$sql .= $tax_query_sql['where'] . $meta_query_sql['where'];
-
-		return $wpdb->get_row( $sql );
-	}
-
-	/**
 	 * Corrected other product filter name
 	 *
 	 * @param  string $other_products - Other product filter name

@@ -1,0 +1,154 @@
+/**
+ * Price Slider
+ */
+.price_slider {
+    background: -webkit-linear-gradient(90deg, #353536 0%, #4f5153 100%);
+    background: -moz-linear-gradient(90deg, #353536 0%, #4f5153 100%);
+    background: -o-linear-gradient(90deg, #353536 0%, #4f5153 100%);
+    background: -ms-linear-gradient(90deg, #353536 0%, #4f5153 100%);
+    background: linear-gradient(0deg, #353536 0%, #4f5153 100%);
+    height: 8px;
+    border: none;
+}
+.price_slider .ui-slider-range {
+    background: #37BBEC;
+    height: 8px;
+    border: 1px solid #777;
+}
+.price_slider_amount {
+    margin: 8px 0;
+}
+.price_label {
+    width: 100%;
+    position: relative;
+    font-size: 14px;
+}
+    .price_label .from {
+        float: left;
+    }
+    .price_label .to {
+        float: right;
+    }
+    .price_label .from,
+    .price_label .to {
+        width: 47%;
+        overflow: hidden;
+        margin-bottom: 5px;
+        line-height: 18px;
+        padding: 5px 3px;
+        height: 30px;
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.04);
+        color: #333;
+        border-radius: 3px;
+        border: 1px solid #D2D2D2;
+        text-align: right;
+        background: #fff;
+    }
+
+    .price_label .from-text,
+    .price_label .to-text {
+        position: absolute;
+        top: 5px;
+    }
+    .price_label .from-text {
+        left: 2%;
+    }
+    .price_label .to-text {
+        left: 55%;
+    }
+
+
+/**
+ * Reset filters
+ */
+#reset_filters_form {
+    margin: 20px 0;
+}
+#reset_filters_form input {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin: 10px 0;
+    padding: 0 5px;
+    line-height: 2em;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    color: rgb(0,0,0);
+    outline: none;
+    border: 1px solid rgba(0,0,0,.4);
+    border-top-color: rgba(0,0,0,.3);
+    border-radius: 2px;
+    background: linear-gradient(rgb(255,255,255), rgb(240,240,240));
+    box-shadow:
+            0 0 3px rgba(0,0,0,0) inset,
+            0 1px 1px 1px rgba(255,255,255,.2),
+            0 -1px 1px 1px rgba(0,0,0,0);
+    transition: .2s ease-in-out;
+}
+#reset_filters_form input:hover:not(:active) {
+    box-shadow:
+            0 0 2px rgba(0,0,0,0) inset,
+            0 1px 1px 1px rgba(55, 187, 236, 0.31),
+            0 -1px 1px 1px rgba(55, 187, 236, 0.38);
+}
+#reset_filters_form input:active {
+    background: linear-gradient(rgb(250,250,250), rgb(235,235,235));
+    box-shadow:
+            0 0 3px rgba(0,0,0,.5) inset,
+            0 1px 1px 1px rgba(255,255,255,.4),
+            0 -1px 1px 1px rgba(0,0,0,.1);
+}
+
+
+/**
+ * Color and Label filters
+ */
+.wcsam-pfw-checkbox-row,
+.wcsam-pfw-color-filter {
+    display: block;
+}
+.wcsam-pfw-label-filter input[type="checkbox"],
+.wcsam-pfw-color-filter input[type="checkbox"] {
+    margin-right: 5px;
+}
+.wcsam-pfw-label-filter label,
+.wcsam-pfw-color-filter label {
+    cursor: pointer;
+}
+.wcsam-pfw-label-filter .wcsam-pfw-label-name,
+.wcsam-pfw-color-filter .wcsam-pfw-color-block,
+.wcsam-pfw-color-filter .wcsam-pfw-color-name {
+    display: inline-block;
+    position: relative;
+    font-size: 13px;
+    cursor: pointer;
+}
+.wcsam-pfw-color-filter .wcsam-pfw-color-block {
+    border: 1px solid #EBEBEB;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    top: 1px;
+}
+.wcsam-pfw-color-filter .wcsam-pfw-color-block:hover {
+    box-shadow: #BDBCBC 1px 5px 14px;
+    -webkit-box-shadow: #BDBCBC 1px 5px 14px;
+    -moz-box-shadow: #BDBCBC 1px 5px 14px;
+}
+.wcsam-pfw-label-filter .wcsam-pfw-label-name,
+.wcsam-pfw-color-filter .wcsam-pfw-color-name {
+    top: -2px;
+    padding: 0 4px;
+}
+
+.wcsam-pfw-label-filter .wcsam-pfw-label-name:hover,
+.wcsam-pfw-color-filter .wcsam-pfw-color-name:hover {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    /*box-shadow: #05B72B 0 1px 2px;*/
+    /*-webkit-box-shadow: #05B72B 0 1px 2px;*/
+    /*-moz-box-shadow: #05B72B 0 1px 2px;*/
+}

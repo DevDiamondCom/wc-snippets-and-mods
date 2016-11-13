@@ -49,6 +49,59 @@ class Admin_Pages
 		{
 			return array_merge($tabs, array(
 				//------------------------------------------------------------------
+				//  Widgets
+				//------------------------------------------------------------------
+				'widgets' => array(
+					'title_args' => array(
+						'title'   => __("Widgets", WCSAM_PLUGIN_SLUG),
+						'fa-icon' => 'fa-cubes',
+					),
+					'groups' => array(
+						'set_1' => array(
+							'group_args' => array(
+								'title' => __("General settings Widgets", WCSAM_PLUGIN_SLUG),
+								'desc'  => __("General settings for widgets", WCSAM_PLUGIN_SLUG),
+							),
+							'fields' => array(
+								'set_1' => array(
+									'field_args' => array(
+										'title' => __("Updated container", WCSAM_PLUGIN_SLUG),
+										'desc'  => __("Class name or ID name of the updated content", WCSAM_PLUGIN_SLUG),
+									),
+									'fields' => array(
+										array(
+											'type'    => 'text',
+											'name'    => 'update_container_name',
+											'desc'    => '<div><strong>Info: </strong>If nothing is specified, the page will be '.
+												'updated on the SUBMIT event. If specified a container, it will be updated only '.
+												'that part of the page that has specified container. Data is updated on the AJAX</div>'.
+												'<br><div><strong>Example: </strong></div><img src="'. PF_ASSETS_URL .'img/set-01.png">',
+										),
+									),
+								),
+								'set_2' => array(
+									'field_args' => array(
+										'title' => __("Loader IMG", WCSAM_PLUGIN_SLUG),
+										'desc'  => __("Loader image URL", WCSAM_PLUGIN_SLUG),
+									),
+									'fields' => array(
+										array(
+											'type'    => 'text',
+											'name'    => 'loader_img_url',
+											'default' => WCSAM_ASSETS_URL .'img/ajax-loader-balls_150.gif',
+											'desc'    => '<div><strong>Enter your loader or one of the following list</strong></div>'.
+												'<div>'. WCSAM_ASSETS_URL .'img/ajax-loader-balls_150.gif</div>'.
+												'<div>'. WCSAM_ASSETS_URL .'img/ajax-loader-big.gif</div>'.
+												'<div>'. WCSAM_ASSETS_URL .'img/ajax-loader-medium.gif</div>'.
+												'<div>'. WCSAM_ASSETS_URL .'img/ajax-loader-small.gif</div>',
+										),
+									),
+								), // END 'set_1'
+							),
+						), // END 'set_1'
+					),
+				),
+				//------------------------------------------------------------------
 				//  Shortcodes
 				//------------------------------------------------------------------
 				'shortcodes' => array(

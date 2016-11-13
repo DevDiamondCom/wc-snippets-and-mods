@@ -1,0 +1,12 @@
+.pfwa_attributes_table_block {
+    margin: 5px 0 20px;
+}
+    .pfwa_attributes_table_block table {
+        width: 100%;
+    }
+        .pfwa_attributes_table_block table th {
+            text-align: left;
+        }
+        .pfwa_attributes_table_block table input[type=text] {
+            width: 100px;
+        }
