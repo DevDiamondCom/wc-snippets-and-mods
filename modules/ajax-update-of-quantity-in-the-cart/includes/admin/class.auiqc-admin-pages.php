@@ -61,7 +61,7 @@ class Admin_Pages
 							// Edit
 						), // END 'set_2'
 					),
-				), // END help Tab
+				), // END Info Tab
 			));
 		});
 	}
