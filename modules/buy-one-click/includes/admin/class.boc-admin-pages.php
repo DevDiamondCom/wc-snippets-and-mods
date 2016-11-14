@@ -235,7 +235,7 @@ class Admin_Pages
 				'form_settings' => array(
 					'title_args' => array(
 						'title'   => __("Form settings", WCSAM_PLUGIN_SLUG),
-						'fa-icon' => 'fa-gear',
+						'fa-icon' => 'fa-address-card',
 					),
 					'groups' => array(
 						'set_1_1' => array(
@@ -459,7 +459,7 @@ class Admin_Pages
 				'notification' => array(
 					'title_args' => array(
 						'title'   => __("Notification", WCSAM_PLUGIN_SLUG),
-						'fa-icon' => 'fa-gear',
+						'fa-icon' => 'fa-envelope-open',
 					),
 					'groups' => array(
 						'set_1' => array(
@@ -680,9 +680,19 @@ class Admin_Pages
 					),
 				),
 				//------------------------------------------------------------------
-				//  Help page tab
+				//  Info page tab
 				//------------------------------------------------------------------
-//				'help' => array(),
+				'info' => array(
+					'title_args' => array(
+						'title'   => __("Info", WCSAM_PLUGIN_SLUG),
+						'fa-icon' => 'fa-info-circle',
+					),
+					'groups' => array(
+						'set_1' => array(
+							// Edit
+						), // END 'set_1'
+					),
+				), // END Info Tab
 			));
 		});
 	}
