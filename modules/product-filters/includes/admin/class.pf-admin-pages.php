@@ -145,9 +145,19 @@ class Admin_Pages
 					),
 				),
 				//------------------------------------------------------------------
-				//  Help page tab
+				//  Info page tab
 				//------------------------------------------------------------------
-//				'help' => array(),
+				'info' => array(
+					'title_args' => array(
+						'title'   => __("Info", WCSAM_PLUGIN_SLUG),
+						'fa-icon' => 'fa-info-circle',
+					),
+					'groups' => array(
+						'set_1' => array(
+							// Edit
+						), // END 'set_1'
+					),
+				), // END Info Tab
 			));
 		});
 	}
